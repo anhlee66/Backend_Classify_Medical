@@ -1,0 +1,8 @@
+<body>
+    <h1>Upload Image for Classification</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image">
+        <button type="submit">Upload</button>
+    </form>
+</body>
