@@ -1,5 +1,5 @@
 from ultralytics.models import YOLO
+if __name__ == '__main__':
+    model = YOLO('yolov8n-cls.pt')
 
-data  = "E:\Development\Intern\Backend_Classify_Medical\MedicalDisease\source\data.yaml"
-model = YOLO("yolov8-cls.pt")
-model.train(task='classify',mode='train',data='datasets/medical',imgsz=480, epochs=10, batch=8)
+    model.train(data='datasets/medical6',imgsz=480, epochs=10, batch=16,workers=6)
