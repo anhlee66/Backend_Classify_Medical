@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "home",
-    "users"
+    "user",
+    "model",
+    "disease",
+    "request"
 ]
 
 MIDDLEWARE = [
@@ -88,7 +91,7 @@ WSGI_APPLICATION = "MedicalDisease.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
+        'NAME': 'medical',
         'USER': 'anh79',
         'PASSWORD': '0606',
         'HOST':'localhost',
