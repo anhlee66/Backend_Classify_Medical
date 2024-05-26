@@ -31,12 +31,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "core",
+    "api",
+    "api.user",
+    "api.authentication",
+    "api.model"
+   
+   
+
 ]
 
 MIDDLEWARE = [
@@ -49,7 +58,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "backend.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
@@ -67,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "backend.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
@@ -75,8 +84,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'medical',
+        'USER': 'anh79',
+        'PASSWORD': '0606',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
@@ -102,6 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
+# AUTH_USER_MODEL = "api_user.User"
 
 LANGUAGE_CODE = "en-us"
 
@@ -117,6 +131,14 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+ALGORITHMS = ["HS256"]
+
+REST_FRAMEWORK = {
+    # "DEFAULT_AUTHENTICATION_CLASSES": (
+    #     "api.authentication.backends.ActiveSessionAuthentication",
+    # ),
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
