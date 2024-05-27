@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 # Create your models here.
 class Department(models.Model):
@@ -16,25 +17,19 @@ class User(models.Model):
     isStudent = models.BooleanField()
     isOfficer = models.BooleanField()
     deparment = models.ForeignKey(Department,on_delete=models.CASCADE)
+    username = models.CharField( max_length=100)
+    password = models.CharField(max_length=255)
+
     class Meta:
         db_table = "users"
+
+    def check_password(self,_password):
+        if self.password == _password:
+            return True
+        else:
+            return False
+
     
-class Role(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
-    
-    class Meta:
-        db_table='roles'
-
-
-class Account(models.Model):
-    username  = models.CharField(max_length=100)
-    password = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    role = models.ForeignKey(Role,on_delete=models.CASCADE)
-
-    class Meta: 
-        db_table = 'accounts'
 
 
 class Log(models.Model):
