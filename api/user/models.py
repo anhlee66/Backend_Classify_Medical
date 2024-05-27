@@ -34,10 +34,4 @@ class User(models.Model):
         return "{}".format(self.username)
 
 
-class Log(models.Model):
-    created = models.DateTimeField()
-    tag = models.CharField(max_length=100)
-    content = models.CharField(max_length=255)
 
-    class Meta:
-        db_table = "logs"

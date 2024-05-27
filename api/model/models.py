@@ -12,11 +12,11 @@ class Dataset(models.Model):
 
 class Model(models.Model):
     path = models.CharField(max_length=255)
-    accuracy = models.FloatField()
-    created = models.DateTimeField(datetime.now())
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    dataset = models.ForeignKey(Dataset,on_delete=models.CASCADE)
-
+    accuracy = models.FloatField(default=0)
+    created = models.DateTimeField(default=datetime.now())
+    user = models.ForeignKey(User,on_delete=models.CASCADE,default=None)
+    dataset = models.ForeignKey(Dataset,on_delete=models.CASCADE,default=None)
+    isActive = models.BooleanField(default=False)
     class Meta:
         db_table = 'models'
 
