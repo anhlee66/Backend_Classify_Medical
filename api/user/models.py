@@ -1,3 +1,4 @@
+import json
 from django.db import models
 from django import forms
 from django.contrib.auth.models import AbstractUser
@@ -31,7 +32,15 @@ class User(models.Model):
 
 
     def __str__(self):
-        return "{}".format(self.username)
+        user = {
+            "name":self.name,
+            "email":self.email,
+            "gender":self.gender,
+            "username":self.username,
+            "password":self.password,
+            "permission":self.permission
+        }
+        return json.dumps(user)
 
 
 
