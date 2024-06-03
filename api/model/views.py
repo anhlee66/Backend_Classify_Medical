@@ -2,18 +2,28 @@ import cv2
 import json
 import base64
 import os
+import torch 
+
 from os import listdir
 from django.shortcuts import render
+from urllib.parse import parse_qs
 from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from api.model.models import Model,Dataset,Disease
-from api.authentication.views import decode_token,get_permission,is_supperuser
+from api.authentication.views import (
+    decode_token,
+    get_permission,
+    is_supperuser,
+    is_logged_in)
 from ultralytics.models import YOLO
 from core.settings import MODEL,DATASET
 from rest_framework import status
 from PIL import Image
+from torchvision import transforms
+from pytorch_msssim import ssim
+
 
 # Create your views here.
 @csrf_exempt
@@ -48,14 +58,20 @@ def get_request(request):
             for result in results:
                 # print(result.summary())
                 data = result.summary()[0]
-                class_path = DATASET / "{}/val/{}".format(model_name.dataset.path,data["name"])
+                dir_compare = os.path.join(DATASET,"{}\\val\\{}".format(model_name.dataset.path,data["name"]))
+
+                image_compare_list = get_similar_image(image_path=image_full_path,dir_compare=dir_compare,end=5)
+                # print(len(image_compare_list))
+                # class_path = DATASET / "{}/val/{}".format(model_name.dataset.path,data["name"])
                 # image_binary = base64.b64encode(load_image(class_path))
-                
-                image_binary = base64.b64encode(load_image(class_path).read())
-                # img = load_image(class_path)
-                # cv2.imshow("image",img)
-                data["image_name"] = image.name
-                data["image_base64"] = image_binary.decode('utf-8')
+                # print(image_compare)
+                image_binary_list = []
+                for image_compare in image_compare_list:
+                    image_read = open(image_compare['path'],'rb').read()
+                    image_binary = base64.b64encode(image_read)
+                    image_binary_list.append({'image':image_binary.decode('utf-8')})
+
+                data["image_base64"] = image_binary_list
                 # print(data)
                 response.append(data)
                 continue
@@ -74,9 +90,57 @@ def load_image(path):
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
+def get_similar_image(image_path, dir_compare, start=0,end=1):
+    image = Image.open(image_path)
+    try:
+        image_list = listdir(dir_compare)
+    except:
+        print(dir_compare)
+
+    max = 0
+    similar_image = []
+
+    for img in image_list:
+        img_compare = Image.open(os.path.join(dir_compare,img))
+
+        # Define a transform to resize and convert to tensor
+        transform = transforms.Compose([
+            transforms.Resize((224,224)),  # Resize to the same size
+            transforms.ToTensor(),  # Convert to tensor
+        ])
+
+        # Apply the transform
+        tensor1 = transform(image)
+        tensor2 = transform(img_compare)
+
+        # Calculate Mean Squared Error
+        mse = torch.mean((tensor1 - tensor2) ** 2)
+        # print(f'Mean Squared Error: {mse.item()}')
+
+        # Calculate SSIM
+        ssim_index = ssim(tensor1.unsqueeze(0), tensor2.unsqueeze(0), data_range=1.0, size_average=True)
+        # if max < ssim_index.item():
+        #     max = ssim_index.item()
+        #     similar_image = os.path.join(dir_compare,img)
+        similar_image.append({
+            'path':os.path.join(dir_compare,img),
+            'ssim':float(ssim_index.item())
+        })
+    return sorted(similar_image,key= lambda d : d['ssim'],reverse=True)[start:end]
+@csrf_exempt
+def view_more_image(request):
+    if is_logged_in(request.COOKIES.get('token')):
+        query = parse_qs(request.GET.urlencode())
+        name = query['name'][0]
+        start = query['start'][0]
+        end = query['end'][0]
+        
+        print(name,start,end)
+        return JsonResponse({})
 @csrf_exempt
 @require_http_methods(['POST'])
 async def train_model(request):
+
     try:
         model_name = Model.objects.get(path = request.POST.get("model"))
         print(os.path.join(MODEL,model_name.path))

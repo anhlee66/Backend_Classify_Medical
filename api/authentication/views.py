@@ -67,6 +67,7 @@ def login(request):
         },status=status.HTTP_200_OK)
         response.set_cookie("token",session.token)
         response.set_cookie("current_user",user.id)
+        response.set_cookie("permission",user.permission)
         # response.set_cookie("csfrtoken",cs)
         login_log("login",user=user)
         return response
