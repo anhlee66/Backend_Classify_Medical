@@ -11,12 +11,13 @@ from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from api.model.models import Model,Dataset,Disease
+from api.model.models import Model,Dataset,Disease,Request
 from api.authentication.views import (
     decode_token,
     get_permission,
     is_supperuser,
     is_logged_in)
+from api.user.models import User
 from ultralytics.models import YOLO
 from core.settings import MODEL,DATASET
 from rest_framework import status
@@ -31,8 +32,8 @@ def get_request(request):
     token = request.COOKIES.get("token")
     if(token is None):
         return JsonResponse({"msg":"must be logged in"})
-    res = decode_token(token=token)
-    
+    cookie = decode_token(token=token)
+
     request.session.set_test_cookie()
     if request.method == 'POST': # and request.FILES.getlist('image'):
         if request.session.test_cookie_worked():
@@ -41,7 +42,7 @@ def get_request(request):
                 model_name = Model.objects.get(isActive=True)
 
         except:
-            return JsonResponse({"msg":"model not found"})
+            return JsonResponse({"msg":"model not found","error":True},status=status.HTTP_404_NOT_FOUND)
         
         model = YOLO(MODEL / "{}".format(model_name.path))
         
@@ -54,10 +55,17 @@ def get_request(request):
             
             img = cv2.imread(image_full_path)
             results = model(img)
-            
-            for result in results:
+
+            user = User.objects.get(id=cookie["id"])
+            request = Request.objects.create(user=user,content="this is my request",image=image_path)
+            print(request)
+            result = results[0]
                 # print(result.summary())
-                data = result.summary()[0]
+            datas = result.summary()
+            
+            for data in datas:
+                # if data['confidence'] < 0.5:
+                #     continue
                 dir_compare = os.path.join(DATASET,"{}\\val\\{}".format(model_name.dataset.path,data["name"]))
 
                 image_compare_list = get_similar_image(image_path=image_full_path,dir_compare=dir_compare,end=5)
@@ -70,14 +78,16 @@ def get_request(request):
                     image_read = open(image_compare['path'],'rb').read()
                     image_binary = base64.b64encode(image_read)
                     image_binary_list.append({'image':image_binary.decode('utf-8')})
-
+                data["image_name"] = image.name
                 data["image_base64"] = image_binary_list
-                # print(data)
+                print(data['confidence'])
                 response.append(data)
-                continue
+                print(f"name: {data['name']} - confidence: {data['confidence']}")
                 # return HttpResponse(result.tojson())
             
-            # print("image",response)
+            print("image",response)
+        if len(response) == 0 :
+            return JsonResponse({"error":True},status=status.HTTP_404_NOT_FOUND)
         return JsonResponse(response,status = status.HTTP_200_OK,safe=False)
     return JsonResponse({"msg":"get request"})
 
@@ -98,6 +108,8 @@ def get_similar_image(image_path, dir_compare, start=0,end=1):
         print(dir_compare)
 
     max = 0
+    if end > len(image_list): 
+        end = len(image_list)
     similar_image = []
 
     for img in image_list:
@@ -130,13 +142,27 @@ def get_similar_image(image_path, dir_compare, start=0,end=1):
 @csrf_exempt
 def view_more_image(request):
     if is_logged_in(request.COOKIES.get('token')):
-        query = parse_qs(request.GET.urlencode())
-        name = query['name'][0]
-        start = query['start'][0]
-        end = query['end'][0]
-        
-        print(name,start,end)
-        return JsonResponse({})
+        data =request.POST
+        image = data.get('image')
+        name = data.get("name")
+        start = int(data.get("start"))
+        end = int(data.get("end"))
+        print(start,end)
+        model_name = Model.objects.get(isActive=True)
+
+        dir_compare = os.path.join(DATASET,"{}\\val\\{}".format(model_name.dataset.path,name))
+        image_path=f"tmp\\{image}"
+        print(image_path)
+        image_compare_list = get_similar_image(image_path=image_path,dir_compare=dir_compare,start=start,end=end)
+     
+        image_binary_list = []
+        for image_compare in image_compare_list:
+            image_read = open(image_compare['path'],'rb').read()
+            image_binary = base64.b64encode(image_read)
+            image_binary_list.append({'image':image_binary.decode('utf-8')})
+        print(image_binary_list)
+        return JsonResponse({'data':image_binary_list})
+    
 @csrf_exempt
 @require_http_methods(['POST'])
 async def train_model(request):

@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Department(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,unique=True)
     description = models.CharField(max_length=255)
     
     class Meta:
@@ -13,16 +13,15 @@ class Department(models.Model):
 
 class User(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    email = models.EmailField(max_length=100,unique=True)
     gender = models.BooleanField(default=True)
     permission = models.CharField(max_length=100,default='admin')
-    # deparment = models.ForeignKey(Department,on_delete=models.CASCADE,default=0)
-    username = models.CharField( max_length=100)
+    username = models.CharField( max_length=100,unique=True)
     password = models.CharField(max_length=255)
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = "username,email,password"
-    class Meta:
-        db_table = "users"
+    # class Meta:
+    #     db_table = "users"
 
     def authenticate(username,password):
         try:
