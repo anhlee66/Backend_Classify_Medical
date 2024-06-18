@@ -1,0 +1,1 @@
+C:\Users\anh79\anaconda3\envs\cuda\python.exe train.py

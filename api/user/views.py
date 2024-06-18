@@ -1,6 +1,6 @@
 import json
 import jwt
-
+from datetime import datetime
 from django.shortcuts import render
 from rest_framework import status
 from django.http import JsonResponse
@@ -36,7 +36,25 @@ def get_user_by_permission(request,permission):
         return JsonResponse(users,safe=False)
     except:
         return JsonResponse({"msg":"do not match any user"})
-    
+
+@require_GET
+def get_new_user(request):
+    now = datetime.now()
+    week = now.strftime("%U")
+    data = []
+    # print(week)
+    try:
+        users = list(User.objects.all().values())
+        for user in users:
+            # print(user)
+            if user["permission"] != "student":
+                continue
+            if week == user["created"].strftime("%U"):
+                data.append(user)
+    except:
+        user = None
+    print(data)
+    return JsonResponse(data,safe=False,status=status.HTTP_200_OK)
 @require_http_methods(['POST'])
 def update_user_information(request):
     print(request.body)

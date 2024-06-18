@@ -1,0 +1,18 @@
+{
+    "nevus_melano":{
+        "label":"",
+        "concept":"",
+        "reason":"",
+        "symptom":"",
+        "consequence":"",
+        "type":"dermatology" 
+    },
+    "nevus_melano1":{
+        "label":"",
+        "concept":"",
+        "reason":"",
+        "symptom":"",
+        "consequence":"",
+        "type":"dermatology" 
+    }
+}

@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from django.db import models
 from django import forms
 from django.contrib.auth.models import AbstractUser
@@ -12,12 +13,20 @@ class Department(models.Model):
         db_table='departments'
 
 class User(models.Model):
+    choices = (
+        ("ADMIN","admin"),
+        ("STUDENT","student"),
+        ("OFFICER","officer")
+    )
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100,unique=True)
     gender = models.BooleanField(default=True)
-    permission = models.CharField(max_length=100,default='admin')
+    permission = models.CharField(max_length=100,choices=choices,default="student")
     username = models.CharField( max_length=100,unique=True)
     password = models.CharField(max_length=255)
+    created = models.DateField(auto_now_add=True)
+    avatar = models.CharField(max_length=255,default="default.jpg")
+    department = models.OneToOneField(Department,null=True,on_delete=models.SET_NULL)
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = "username,email,password"
     # class Meta:

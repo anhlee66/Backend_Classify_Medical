@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from core.view import (
+    get_statistic,
+    get_recent_loggedin)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/user/",include("api.routers.users"),name="api-users"),
     path("api/model/",include("api.routers.models"),name="api-model"),
-    path("api/disease/",include("api.routers.disease"),name="api-disease")
+    path("api/disease/",include("api.routers.disease"),name="api-disease"),
+    path("api/statistic/",include("api.routers.statistic"),name="api-statistic"),
+    path("api/question/",include("api.routers.question"),name="api-question"),
 ]

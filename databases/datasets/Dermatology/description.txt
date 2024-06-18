@@ -1,0 +1,11 @@
+class: 8
+name:
+Melanoma	
+	Melanocytic nevus	
+	Basal cell carcinoma	
+	Actinic keratosis	
+	Benign keratosis	
+	Dermatofibroma	
+	Vascular lesion	
+	Squamous cell carcinoma	
+	Melanoma

@@ -1,0 +1,63 @@
+{
+	"Actinic_keratosis": {
+		"label": "Actinic Keratosis (Dày Sừng Quang Hóa)",
+		"concept": "Còn được gọi là dày sừng ánh sáng, là một sự tăng trưởng tiền ung thư trên da.",
+		"reason": "Nguyên nhân chính là tiếp xúc lâu dài với ánh nắng mặt trời, đặc biệt là ánh sáng tử ngoại (UV).Nếu không được điều trị kịp thời, có nguy cơ tiến triển thành ung thư tế bào đáy.",
+		"symptom": "Thường xuất hiện ở vùng da bị phơi nắng nhiều như mặt, môi, tai, cánh tay, da đầu, cổ hoặc mu bàn tay.\nBiểu hiện bao gồm da dày, tăng sừng, thô ráp, và các mảng sần sùi có vảy trên da.",
+		"consequence": "Dày sừng quang hóa phát triển chậm và có thể tiến triển thành ung thư tế bào đáy nếu không được điều trị kịp thời.",
+		"type": "dermatology"
+	},
+	"Basal_cell_carcinoma": {
+		"label": "Basal Cell Carcinoma (Ung Thư Biểu Mô Tế Bào Đáy)",
+		"concept": "Bắt đầu trong các tế bào đáy, loại tế bào trong da tạo ra các tế bào da mới khi các tế bào cũ chết đi.\nThường xuất hiện dưới dạng một vết sưng hơi trong suốt trên da, đặc biệt là trên các vùng da tiếp xúc nhiều với ánh nắng mặt trời như đầu và cổ.",
+		"reason": "Nguyên nhân chính là tiếp xúc lâu dài với bức xạ cực tím (UV) từ ánh sáng mặt trời và các yếu tố khác như xạ trị, da trắng, tuổi tác, tiền sử cá nhân hoặc gia đình bị ung thư da, thuốc ức chế miễn dịch, tiếp xúc với asen, và hội chứng di truyền gây ung thư da.",
+		"symptom": "Có các biểu hiện như:\nVết sưng sáng bóng, màu da trong mờ, có thể trông trắng ngọc trai hoặc hồng trên da trắng, hoặc màu nâu hoặc đen bóng trên da nâu và đen.\nTổn thương màu nâu, đen hoặc xanh, có đốm đen, với đường viền hơi nhô lên.\nMiếng vá phẳng, có vảy với một cạnh nổi lên, có thể phát triển lớn theo thời gian.\nTổn thương màu trắng, sáp, giống như sẹo mà không có đường viền rõ ràng.",
+		"consequence": "Tăng nguy cơ mắc các ung thư khác, ung thư lan ngoài da.",
+		"type": "dermatology"
+	},
+	"Benign_keratosis": {
+		"label": "Benign Keratosis Pigmented (Chứng Dày Sừng Tiết Bã)",
+		"concept": "Chứng Dày Sừng Tiết Bã là một loại tăng sinh da không phải do ung thư, thường gặp ở người lớn tuổi. ",
+		"reason": "Chưa biết rõ nguyên nhân chính xác.\nYếu tố di truyền: Gia đình có tiền sử bệnh tăng nguy cơ mắc bệnh.\nKhí hậu: Người sống ở vùng khí hậu nóng có nguy cơ mắc cao hơn.\nTiếp xúc với ánh nắng và bít tắc lỗ chân lông có liên quan đến bệnh.",
+		"symptom": "Ban đầu, các nốt phẳng và có màu nâu sáng.\nSau đó, chúng to ra và có hình dạng giống mụn cóc, thường chuyển từ màu nâu sáng sang nâu tối hoặc đen.\nVị trí thường xuất hiện trên mặt, vai, lưng và ngực.",
+		"consequence": "Bệnh không gây đau và không ảnh hưởng đến sức khỏe, nhưng ảnh hưởng đến tính thẩm mỹ của làn da.\nNếu các khối dày sừng phát triển nhanh, có vết loét hoặc chảy máu, cần khám bác sĩ da liễu để kiểm tra nguy cơ ung thư da",
+		"type": "dermatology"
+	},
+	"Squamous_cell_carcinoma": {
+		"label": "Carcinoma Cell Squamous (Ung thư biểu mô tế bào vảy)",
+		"concept": "Ung thư biểu mô tế bào vảy là một loại ung thư da phát triển từ tế bào gọi là tế bào vảy, tạo nên lớp giữa và lớp ngoài của da.",
+		"reason":"Thay đổi DNA trong tế bào vảy dẫn đến sự phát triển nhanh của tế bào.\nTia cực tím từ ánh sáng mặt trời hoặc giường tắm nắng là nguyên nhân chính.\nYếu tố khác bao gồm hệ thống miễn dịch suy yếu, nhiễm papillomavirus ở người (HPV), và tiền sử tổn thương da tiền ung thư.",
+		"symptom":"Vết sưng chắc chắn trên da, được gọi là nốt sần. Các nốt sần có thể cùng màu với da hoặc trông khác nhau (màu hồng, đỏ, đen hoặc nâu).\nVết loét phẳng với lớp vỏ có vảy.\nKhu vực đau hoặc nổi lên mới trên vết sẹo cũ hoặc vết thương.\nMảng thô, có vảy trên môi có thể trở thành vết loét mở.\nMiếng vá đau hoặc thô ráp bên trong miệng.\nMiếng vá nổi lên hoặc vết loét giống như mụn cóc trên hoặc ở hậu môn hoặc trên bộ phận sinh dục.",
+		"consequence":"Đây là loại ung thư da phổ biến và thường không đe dọa tính mạng.Tuy nhiên, nếu không được điều trị, nó có thể phát triển lớn hoặc lan sang các bộ phận khác của cơ thể.",
+		"type": "dermatology"
+	},
+	"Vascular_lesion": {
+		"label": "Lesion Vascular (Tổn Thương Mạch Máu Của Da)",
+		"concept":"Tổn thương mạch máu bao gồm các tổn thương mắc phải như Nevus Araneus (còn được gọi là mạch máu nhện) và những tổn thương có mặt khi sinh hoặc phát sinh ngay sau khi sinh (vết bớt mạch máu).\nNevus Araneus là một tổn thương mạch máu màu đỏ tươi, mờ nhạt, bao gồm một tiểu động mạch trung tâm với các hình chiếu mảnh mai giống như chân nhện.\nU hạt Sinh Mủ là thịt, ẩm hoặc giòn, thường là các nốt mạch máu đỏ tươi bao gồm các mao mạch tăng sinh trong một lớp nền phù nề.",
+		"reason":"Nevus Araneus:\nTổn thương mắc phải.\nMột tổn thương hoặc một số lượng nhỏ các tổn thương không liên quan đến bệnh nội bộ có thể xảy ra ở trẻ em hoặc người lớn.\nBệnh nhân bị bệnh gan hoặc xơ gan phát triển nhiều u mạch máu nhện có thể trở nên khá nổi bật.\nNhiều phụ nữ phát triển các tổn thương trong khi mang thai hoặc trong khi dùng thuốc tránh thai.\nU hạt Sinh Mủ:\nTổn thương, bao gồm mô mạch máu, không có nguồn gốc vi khuẩn cũng không phải là u hạt thực sự.\nNó phát triển nhanh chóng, thường ở vị trí chấn thương gần đây (mặc dù chấn thương có thể không được nhớ lại), thường phát triển đường kính không lớn hơn 2 cm, và có thể đại diện cho phản ứng mạch máu và xơ đối với chấn thương.\nKhông có khuynh hướng giới tính hoặc tuổi tác.",
+		"symptom":"Nevus Araneus:\nTổn thương không có triệu chứng và thường tự khỏi khoảng 6 đến 9 tháng sau sinh hoặc sau khi ngừng thuốc tránh thai.\nCác tổn thương không phải là hiếm trên khuôn mặt của trẻ em.\nNén mạch trung tâm tạm thời xóa sạch tổn thương.\nU hạt Sinh Mủ:\nLớp biểu bì phía trên mỏng, và tổn thương có xu hướng dễ vỡ, dễ chảy máu và không bị chần khi áp lực.\nCác cơ sở có thể được cuống và bao quanh bởi một cổ áo của lớp biểu bì.\nKhi mang thai, u hạt sinh mủ có thể trở nên lớn và xuất hiện (được gọi là khối u thai kỳ nướu hoặc epulis telangiectatic).",
+		"consequence": "",
+		"type": "dermatology"
+	},
+	"Melanoma": {
+		"label": "Melanoma (Khối U Ác Tính",
+		"concept":"Khối u ác tính (melanoma), thường được gọi là “khối u đen,” là một dạng nguy hiểm nhất của ung thư da.Nó phát triển một cách nhanh chóng và có khả năng lây lan sang bất kỳ bộ phận nào của cơ thể. Khối u ác tính bắt nguồn từ tế bào da được gọi là melanocytes, chúng sản xuất melanin, chất sắc tố tạo nên màu sắc cho da.",
+		"reason":"Nguyên nhân chính xác của tất cả các khối u ác tính không rõ ràng. Hầu hết các khối u ác tính là do tiếp xúc với ánh sáng cực tím.\nÁnh sáng cực tím, còn được gọi là tia UV, đến từ ánh sáng mặt trời hoặc đèn thuộc da và giường. Hạn chế tiếp xúc với tia UV có thể giúp giảm nguy cơ u ác tính.","symptom":"Khối u ác tính thường bắt đầu trên da thường xuyên tiếp xúc với ánh nắng mặt trời. Điều này bao gồm da trên cánh tay, lưng, mặt và chân. Khối u ác tính cũng có thể hình thành trong mắt. Hiếm khi, nó có thể xảy ra bên trong cơ thể, chẳng hạn như trong mũi hoặc cổ họng.\nCác dấu hiệu và triệu chứng u ác tính đầu tiên thường là:\nMột sự thay đổi trong một nốt ruồi hiện có.\nSự phát triển của một sắc tố mới hoặc tăng trưởng trông bất thường trên da.",
+		"consequence": "",
+		"type": "dermatology"
+	},
+	"Melanocytic_nevus": {
+		"label": "Nevus (Nốt Ruồi)",
+		"concept":"Nốt ruồi hay còn được gọi là nevi) là một loại tăng trưởng da phổ biến. Chúng thường xuất hiện dưới dạng những đốm nhỏ, màu nâu sẫm do các cụm tế bào hình thành sắc tố gọi là melanocytes. Những nốt ruồi này có thể thay đổi theo thời gian và cũng có thể mờ dần.\nHầu hết các nốt ruồi là vô hại. Tuy nhiên, hiếm khi chúng trở thành ung thư.",
+		"reason":"Nốt ruồi được gây ra khi các tế bào trong da gọi là melanocytes phát triển thành cụm. Melanocytes thường được phân phối khắp da và sản xuất melanin, sắc tố tự nhiên mang lại cho da màu sắc của nó.",
+		"symptom":"Nốt ruồi điển hình là một đốm nâu nhỏ. Tuy nhiên, chúng có thể có nhiều màu sắc, hình dạng và kích cỡ khác nhau:\nMàu sắc và kết cấu: Nốt ruồi có thể có màu nâu, nâu, đen, xanh, đỏ hoặc hồng. Chúng có thể mịn màng, nhăn, phẳng hoặc lớn lên, và có thể có tóc mọc từ chúng.\nHình dạng: Hầu hết các nốt ruồi có hình bầu dục hoặc tròn.\nKích thước: Nốt ruồi thường có đường kính nhỏ hơn 1/4 inch (khoảng 6 mm), tương đương với kích thước của một cục tẩy bút chì.",
+		"consequence": "",
+		"type": "dermatology"
+	},
+	"Dermatofibroma": {
+		"label": "Dermatofibroma (U xơ da)",
+		"concept": "U xơ da (hay còn được gọi là dermatofibroma) là một loại tăng trưởng da phổ biến, thường xuất hiện trên da chân dưới.",
+		"reason":"Nó không phải là rõ ràng nếu u xơ da là một quá trình phản ứng hoặc một tân sinh thực sự.\nCác tổn thương bao gồm các nguyên bào sợi tăng sinh. Histiocytes cũng có thể được tham gia.\nĐôi khi chúng được quy cho chấn thương nhỏ bao gồm côn trùng cắn, tiêm hoặc chấn thương gai hoa hồng, nhưng không nhất quán.\nNhiều dermatofibromas có thể phát triển ở những bệnh nhân có khả năng miễn dịch thay đổi như HIV, ức chế miễn dịch, hoặc điều kiện tự miễn dịch.",
+		"symptom":"U xơ da thường biểu hiện dưới dạng sẩn cứng đơn độc hoặc nốt sần trên chi.\nKích thước u xơ da thay đổi từ đường kính 0,5-1,5 cm; hầu hết các tổn thương có đường kính 7-10 mm.\nU xơ da được buộc vào bề mặt da và di động trên mô dưới da.\nDa lúm đồng tiền trên véo tổn thương - dấu hiệu lúm đồng tiền hoặc véo.\nMàu sắc có thể từ hồng đến nâu nhạt ở da trắng và nâu sẫm đến đen ở da sẫm màu; một số xuất hiện nhạt hơn ở trung tâm.\nU xơ da thường không gây ra triệu chứng, nhưng đôi khi chúng đau, mềm hoặc ngứa.\nCác biến thể lâm sàng bao gồm khổng lồ, phun trào và nhiều dạng.","consequence": "Đôi khi hàng chục nốt có thể bùng phát trong vòng vài tháng, thường là do ức chế miễn dịch","type": "dermatology"
+	}
+}

@@ -1,0 +1,1 @@
+C:\Users\anh79\anaconda3\envs\django\python.exe manage.py runserver 8080
