@@ -70,7 +70,7 @@ def get_request(request):
             for data in datas:
                 # if data['confidence'] < 0.5:
                 #     continue
-                dir_compare = os.path.join(DATASET,"{}\\val\\{}".format(model_name.dataset.path,data["name"]))
+                dir_compare = os.path.join(DATASET,"{}/val/{}".format(model_name.dataset.path,data["name"]))
 
                 image_compare_list = get_similar_image(image_path=image_full_path,dir_compare=dir_compare,end=5)
               
@@ -160,8 +160,8 @@ def view_more_image(request):
         print(start,end)
         model_name = Model.objects.get(isActive=True)
 
-        dir_compare = os.path.join(DATASET,"{}\\val\\{}".format(model_name.dataset.path,name))
-        image_path=f"tmp\\{image}"
+        dir_compare = os.path.join(DATASET,"{}/val/{}".format(model_name.dataset.path,name))
+        image_path=f"tmp/{image}"
         print(image_path)
         image_compare_list = get_similar_image(image_path=image_path,dir_compare=dir_compare,start=start,end=end)
      
