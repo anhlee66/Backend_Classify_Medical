@@ -1,4 +1,0 @@
-django
-ultralytics
-mysqlclient
-djangorestframework
