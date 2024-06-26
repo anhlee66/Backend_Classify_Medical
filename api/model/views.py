@@ -13,7 +13,8 @@ from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from api.model.models import Model,Dataset,Disease,Request,Question,Anwser
+from api.model.models import Model,Dataset,Disease,Request,Question,Anwser,QuestionInstance
+from api.user.models import Department
 from api.authentication.views import (
     decode_token,
     get_permission,
@@ -244,7 +245,8 @@ def get_active_model(request):
         print("active",data)
         # print(model)
         return JsonResponse(data,safe=False,status=status.HTTP_200_OK)
-    except:
+    except Model.DoesNotExist as err:
+        print(err)
         return JsonResponse({"msg":"model not found"},status=status.HTTP_404_NOT_FOUND)
 
 @csrf_exempt
@@ -439,7 +441,7 @@ def send_question(request):
         return JsonResponse({"msg":"send request oke"},status=200)
     return JsonResponse({"msg":"something error"},status=400)
 
-def get_all_question(request):
+def get_question_by_state(request):
     token = decode_token(request.COOKIES.get("token"))
     if token is None:
         return JsonResponse({"msg":"not logged in"},status=400)
@@ -480,6 +482,50 @@ def get_all_question(request):
         question["name"] = name
         # print(question["name"])
     return JsonResponse(questions,safe=False,status=200)
+
+@csrf_exempt
+def get_question_by_process(request):
+    token = decode_token(request.COOKIES.get("token"))
+    if token is None:
+        return JsonResponse({"msg":"not logged in"},status=400)
+    
+    # print(parse_qs(request.GET.urlencode()))
+    query = parse_qs(request.GET.urlencode())
+    state = query["state"][0]
+    if(token["permission"] == "student"):
+        return JsonResponse({"msg":"permission not allow"},status=403)
+    
+    try:       
+        questions = list(Question.objects.all().values())
+       
+    except Question.DoesNotExist as err:
+        print(err)
+        return JsonResponse({"msg":"not found"},status=404)
+    new_questions = []
+    for question in questions:
+        q = Question.objects.get(id=question["id"])
+        is_exists  = QuestionInstance.objects.filter(question = q).exists()
+        print(is_exists,len(questions),state)
+        if state == "done" and not is_exists :
+            continue
+        elif state == "wait" and  is_exists:
+            continue
+        image = question["image"]
+        with open(image,"rb") as img:
+            image_encode = base64.b64encode(img.read())
+            image_decode = image_encode.decode("utf-8")
+            question["image"] = image_decode
+        created = question["created"]
+        question["created"] = f'{created.strftime("%x")} {created.strftime("%X")}'
+        try:
+            user = User.objects.filter(id=question["user_id"]).values().first()
+            name = user["name"]
+        except User.DoesNotExist as err:
+            print(err)
+        question["name"] = name
+        # print(question["name"])
+        new_questions.append(question)
+    return JsonResponse(new_questions,safe=False,status=200)
 
 @require_http_methods(["POST"])
 @csrf_exempt
@@ -588,3 +634,27 @@ def get_anwser_by_user(request,id):
     # print(res)
     res.reverse()
     return JsonResponse(res,safe=False,status=200)
+
+@require_http_methods(["POST"])
+@csrf_exempt
+def add_question_instance(request,question_id,department_id):
+    print(question_id,department_id)
+    try:
+        department = Department.objects.get(id=department_id)
+
+    except Department.DoesNotExist as err:
+        print(err)
+        return JsonResponse({"msg":"not found"},status=404)
+    try:
+        question = Question.objects.get(id=question_id)
+    
+    except Question.DoesNotExist as err:
+        print(err)
+        return JsonResponse({"msg":"not found"},status=404)
+    try:
+        question_instance = QuestionInstance.objects.create(question=question,department=department)
+    except:
+        print("error")
+        return JsonResponse({"msg":"server error"},status=500)
+    
+    return JsonResponse({"msg":"successfull"},status=200)

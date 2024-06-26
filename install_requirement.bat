@@ -1,4 +1,4 @@
-pip install django
-pip install ultralytics
-pip install mysqlclient
-pip install djangorestframework
+django
+ultralytics
+mysqlclient
+djangorestframework

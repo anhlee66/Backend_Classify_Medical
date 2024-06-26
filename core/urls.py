@@ -16,9 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from core.view import (
-    get_statistic,
-    get_recent_loggedin)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/user/",include("api.routers.users"),name="api-users"),
@@ -26,4 +24,6 @@ urlpatterns = [
     path("api/disease/",include("api.routers.disease"),name="api-disease"),
     path("api/statistic/",include("api.routers.statistic"),name="api-statistic"),
     path("api/question/",include("api.routers.question"),name="api-question"),
+    path("api/dataset/",include("api.routers.dataset"),name="api-dataset"),
+    path("api/department/",include("api.routers.department"),name="api-department")
 ]

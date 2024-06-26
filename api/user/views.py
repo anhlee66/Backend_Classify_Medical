@@ -5,7 +5,7 @@ from django.shortcuts import render
 from rest_framework import status
 from django.http import JsonResponse
 from django.conf.global_settings import SECRET_KEY
-from api.user.models import User
+from api.user.models import User, Department
 from api.authentication.views import (
     get_permission, 
     get_current_user,
@@ -108,3 +108,19 @@ def search_user(request):
     query = parse_qs(request.GET.urlencode())
     print(query["name"])
     return JsonResponse({"msg":"helo"})
+
+@require_http_methods(["GET"])
+def get_all_department(request):
+    if not is_logged_in(request.COOKIES.get("token")):
+                return JsonResponse({"msg":"not logged in"},status=401)
+    if  not is_supperuser(request):
+        return JsonResponse({"msg":"permission not allow"},status=403)
+    try:
+        department = list(Department.objects.all().values())
+
+    except Department.DoesNotExist as err:
+        print(err)
+        return JsonResponse({"msg":"not fount object"},status=404)
+    
+    
+    return JsonResponse(department,safe=False,status=200)
