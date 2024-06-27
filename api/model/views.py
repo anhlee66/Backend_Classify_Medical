@@ -410,6 +410,24 @@ def get_disease(request,id):
         return JsonResponse({},status=404)
     return  JsonResponse(disease,safe=False,status=200)
 
+def search_disease(request):
+    token = request.COOKIES.get("token")
+    if not is_logged_in(token):
+        return JsonResponse({"msg":"not logged in"},status=status.HTTP_401_UNAUTHORIZED)
+    if request.method == 'GET':
+        query = request.GET.get('query', '')
+        if query:
+            diseases = Disease.objects.filter(name__icontains=query) | Disease.objects.filter(label__icontains=query)
+            if diseases.exists():
+                results = list(diseases.values('name', 'label', 'concept', 'reason', 'symptom', 'consequence', 'type'))
+                return JsonResponse(results, safe=False)
+            else:
+                return JsonResponse({'message': 'No diseases found with that name'}, status=404)
+        else:
+            return JsonResponse({'message': 'No query parameter provided'}, status=400)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=405)
+
 def get_dataset(request,id):
     return JsonResponse({})
 
